@@ -20,7 +20,7 @@ import inspect
 import locale
 import os
 import re
-import sha
+import hashlib
 import subprocess
 import sys
 
@@ -310,7 +310,7 @@ class Graphviz(Component):
         encoded_cmd = (processor + unicode(self.processor_options)) \
                 .encode(self.encoding)
         encoded_content = content.encode(self.encoding)
-        sha_key  = sha.new(encoded_cmd + encoded_content).hexdigest()
+        sha_key  = hashlib.new(encoded_cmd + encoded_content).hexdigest()
         img_name = '%s.%s.%s' % (sha_key, processor, out_format)
         # cache: hash.<dot>.<png>
         img_path = os.path.join(self.cache_dir, img_name)
